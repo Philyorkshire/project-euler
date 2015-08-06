@@ -6,32 +6,30 @@
     {
         static void Main(string[] args)
         {
-            var x = 1;
-            var y = 2;
+            const long number = 600851475143;
 
-            // 4613732
-            var total = 0;
+            Console.WriteLine("Largest Prime Factor: {0}", largestPrimeFactor(number));
+            Console.ReadLine();
+        }
 
-            while (true)
+        public static long largestPrimeFactor(long n)
+        {
+            var sqrt = (long)Math.Ceiling(Math.Sqrt(n));
+
+            long largest = -1;
+
+            for (long i = 2; i <= sqrt; i++)
             {
-                var added = (x + y);
+                if (n%i != 0) continue;
 
-                if (y % 2 == 0)
+                var test = largestPrimeFactor(n / i);
+                if (test > largest)
                 {
-                    total = total + y;
-                }
-
-                x = y;
-                y = added;
-
-                if (y > 4000000)
-                {
-                    break;
+                    largest = test;
                 }
             }
 
-            Console.WriteLine("Total: {0}", total);
-            Console.ReadLine();
+            return largest != -1 ? largest : n;
         }
     }
 }
