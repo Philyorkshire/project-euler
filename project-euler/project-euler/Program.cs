@@ -1,22 +1,32 @@
 ﻿namespace project_euler
 {
     using System;
-    using System.Linq;
 
     class Program
     {
         static void Main(string[] args)
         {
-            var numbers = Enumerable.Range(1, 999);
+            var x = 1;
+            var y = 2;
 
-            // 233168
+            // 4613732
             var total = 0;
 
-            foreach (var number in numbers)
+            while (true)
             {
-                if (number % 3 == 0 || number % 5 == 0)
+                var added = (x + y);
+
+                if (y % 2 == 0)
                 {
-                    total = number + total;
+                    total = total + y;
+                }
+
+                x = y;
+                y = added;
+
+                if (y > 4000000)
+                {
+                    break;
                 }
             }
 
