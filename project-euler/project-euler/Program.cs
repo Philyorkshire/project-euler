@@ -1,35 +1,31 @@
 ﻿namespace project_euler
 {
     using System;
+    using System.Linq;
 
     class Program
     {
         static void Main(string[] args)
         {
-            const long number = 600851475143;
+            var palindrome = 0;
 
-            Console.WriteLine("Largest Prime Factor: {0}", largestPrimeFactor(number));
-            Console.ReadLine();
-        }
-
-        public static long largestPrimeFactor(long n)
-        {
-            var sqrt = (long)Math.Ceiling(Math.Sqrt(n));
-
-            long largest = -1;
-
-            for (long i = 2; i <= sqrt; i++)
+            for (var i = 999; i > 0; i--)
             {
-                if (n%i != 0) continue;
-
-                var test = largestPrimeFactor(n / i);
-                if (test > largest)
+                for (var x = 0; x < 999; x++)
                 {
-                    largest = test;
+                    var multiplied = (x*i);
+                    if (IsPalindrome(multiplied) && multiplied > palindrome) palindrome = multiplied;
                 }
             }
 
-            return largest != -1 ? largest : n;
+            Console.WriteLine("Largest Palindrome: {0}", palindrome);
+            Console.ReadLine();
+        }
+
+        public static bool IsPalindrome(int num)
+        {
+            var reversed = new string(num.ToString().Reverse().ToArray());
+            return reversed == num.ToString();
         }
     }
 }
